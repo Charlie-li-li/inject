@@ -1,0 +1,15 @@
+{
+    "name": "inject",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build":"node index.js"
+    },
+    "keywords": [],
+    "author": "charlie",
+    "license": "ISC",
+    "dependencies": {
+        "request": "^2.88.2"
+    }
+}

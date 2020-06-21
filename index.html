@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="like_button_container"></div>
+    <!--
+        react
+        react-dom
+        lodash
+    -->
+    <script src="./main.js"></script>
+    <script>
+        _.times(5,function(a){
+            console.log(a);
+        });
+        const e = React.createElement;
+        class LikeButton extends React.Component{
+            constructor(props){
+                super(props);
+            }
+            render(){
+                return e(
+                    'button',
+                    null,
+                    "like"
+                )
+            }
+        }
+        const domContainer = document.querySelector('#like_button_container');
+        ReactDOM.render(e(LikeButton), domContainer);
+    </script>
+</body>
+</html>
