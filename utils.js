@@ -19,15 +19,15 @@ const buildPromise = function (item) {
     })
 }
 
-const injectContent = (data) => {
-    fs.appendFileSync('./main.js', data, (err) => {
+const injectContent = (data, path) => {
+    fs.appendFileSync(path, data, (err) => {
         if (err) throw err;
     });
 }
 
 const injectScript = (data, path) => {
     const templete = data.replace('<body>', '<body><script src="./main.js"></script>')
-    fs.writeFile(path, templete, 'utf8', (err)=> {
+    fs.writeFile(path, templete, 'utf8', (err) => {
         if (err) throw err;
         console.log('success');
     })
