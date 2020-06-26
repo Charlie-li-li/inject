@@ -7,7 +7,6 @@ var UglifyJS = require("uglify-js");
 class Inject {
 
     start = () => {
-        const _this = this;
         fs.readFile('./index.html', 'utf8', (err, data) => {
             if (err) throw err;
             const sortArr = utils.getSortArr(data);
