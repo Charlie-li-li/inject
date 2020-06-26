@@ -12,7 +12,11 @@ const config = {
             cdn:"https://unpkg.com/react@16/umd/react.development.js",
             name:"react"
         }
-    ]
+    ],
+    output:{
+        jsPath:"./main.js",
+        htmlPath:"./index.html"
+    }
 }
 
 module.exports = config;

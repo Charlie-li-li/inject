@@ -10,9 +10,7 @@ const getSortArr = (content) => {
 const buildPromise = function (item) {
     return new Promise(resolve => {
         request(item.cdn, (err, res, body) => {
-            if (err) {
-                throw err;
-            }
+            if (err) throw err;
             resolve({
                 name: item.name,
                 body: body
@@ -22,16 +20,23 @@ const buildPromise = function (item) {
 }
 
 const injectContent = (data) => {
-    fs.appendFileSync('./main.js', data , (err) => {
-        if (err) {
-            throw err;
-        }
+    fs.appendFileSync('./main.js', data, (err) => {
+        if (err) throw err;
     });
+}
+
+const injectScript = (data, path) => {
+    const templete = data.replace('<body>', '<body><script src="./main.js"></script>')
+    fs.writeFile(path, templete, 'utf8', (err)=> {
+        if (err) throw err;
+        console.log('success');
+    })
 }
 
 module.exports = {
     getSortArr,
     buildPromise,
+    injectScript,
     injectContent
 }
 

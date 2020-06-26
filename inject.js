@@ -7,10 +7,12 @@ var UglifyJS = require("uglify-js");
 class Inject {
 
     start = () => {
-        fs.readFile('./index.html', 'utf8', (err, data) => {
+        const { output, list } = config;
+        const { jsPath, htmlPath } = output;
+        fs.readFile(htmlPath, 'utf8', (err, data) => {
             if (err) throw err;
             const sortArr = utils.getSortArr(data);
-            const promiseList = config.list.map(utils.buildPromise);
+            const promiseList = list.map(utils.buildPromise);
             return Promise.all(promiseList)
                 .then(result => {
                     sortArr.forEach(elemnt => {
@@ -22,7 +24,7 @@ class Inject {
                         if (error) throw err;
                         utils.injectContent(code);
                     });
-
+                    utils.injectScript(data, htmlPath);
                 });
         });
     }
