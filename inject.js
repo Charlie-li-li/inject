@@ -1,8 +1,8 @@
 
 const fs = require('fs');
 const utils = require('./utils');
-
 const config = require('./config');
+var UglifyJS = require("uglify-js");
 
 class Inject {
 
@@ -18,21 +18,18 @@ class Inject {
                         const tempData = result.filter((item) => {
                             return item.name === elemnt.trim();
                         });
-                        _this._injectContent(tempData[0].body);
+                        const uglifyData = UglifyJS.minify(tempData[0] && tempData[0].body);
+                        const { error, code } = uglifyData;
+                        if (error) throw err;
+                        utils.injectContent(code);
                     });
 
                 });
         });
     }
 
-    _injectContent = (data) => {
-        fs.appendFileSync('./main.js', data , (err) => {
-            if (err) {
-                throw err;
-            }
-        });
-    }
 }
 
 module.exports = Inject;
+
 

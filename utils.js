@@ -1,3 +1,4 @@
+const fs = require('fs');
 const request = require('request');
 
 const getSortArr = (content) => {
@@ -20,7 +21,17 @@ const buildPromise = function (item) {
     })
 }
 
+const injectContent = (data) => {
+    fs.appendFileSync('./main.js', data , (err) => {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
 module.exports = {
     getSortArr,
-    buildPromise
+    buildPromise,
+    injectContent
 }
+
